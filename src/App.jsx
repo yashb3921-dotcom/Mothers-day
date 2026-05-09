@@ -183,7 +183,6 @@ export default function App() {
 
   // Typewriter State
   const [displayedMessage, setDisplayedMessage] = useState("");
-  const [isTyping, setIsTyping] = useState(false);
   const messageRef = useRef(message);
 
   useEffect(() => {
@@ -208,20 +207,17 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    if (isOpened && !isTyping && displayedMessage.length < messageRef.current.length) {
-      setIsTyping(true);
-      let i = 0;
-      const timer = setInterval(() => {
-        setDisplayedMessage(messageRef.current.substring(0, i + 1));
-        i++;
-        if (i === messageRef.current.length) {
-          clearInterval(timer);
-          setIsTyping(false);
-        }
-      }, 50); // Speed of typing
-      return () => clearInterval(timer);
+    if (!isOpened) return;
+    
+    // Smoothly type out the message character by character using setTimeout
+    if (displayedMessage.length < messageRef.current.length) {
+      const timeout = setTimeout(() => {
+        setDisplayedMessage(messageRef.current.substring(0, displayedMessage.length + 1));
+      }, 40); // 40ms typing speed
+      
+      return () => clearTimeout(timeout);
     }
-  }, [isOpened, displayedMessage.length, isTyping]);
+  }, [isOpened, displayedMessage]);
 
   const createParticle = useCallback((x, y) => {
     const id = Date.now() + Math.random();
@@ -277,7 +273,6 @@ export default function App() {
     
     // Reset typing effect
     setDisplayedMessage("");
-    setIsTyping(false);
   };
 
   const copyToClipboard = () => {
