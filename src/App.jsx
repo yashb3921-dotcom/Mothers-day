@@ -335,7 +335,7 @@ export default function App() {
       ) : (
         <div className="relative z-10 max-w-4xl mx-auto px-4 py-12 md:py-20 flex flex-col items-center fade-enter">
           
-          { }
+          {}
           <div className="glass-panel rounded-3xl p-8 md:p-12 w-full text-center relative overflow-hidden mb-12">
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-pink-500 via-purple-500 to-pink-500 opacity-50"></div>
             
@@ -343,7 +343,7 @@ export default function App() {
               Happy Mother's Day, {recipient}!
             </h1>
             
-            <div className="text-xl md:text-2xl text-pink-50 leading-relaxed font-light max-w-2xl mx-auto min-h-[100px]">
+            <div className="text-xl md:text-2xl text-white leading-relaxed font-light max-w-2xl mx-auto min-h-[100px] z-20 relative">
               "<span className="cursor">{displayedMessage}</span>"
             </div>
             
